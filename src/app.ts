@@ -12,7 +12,6 @@ app.get("/", (req: Request, res: Response) => {
 })
 
 // application routes 
-
 app.use("/api", ProductsRoute)
 
 // my expected endpoint
