@@ -1,6 +1,8 @@
 import { Request, Response } from "express"
 import { ProductService } from "./product.service"
 
+// get all product 
+
 const getAllProducts = async (req: Request, res: Response) => {
     try {
         const result = await ProductService.getAllProductsFromDb()
@@ -22,6 +24,8 @@ const getAllProducts = async (req: Request, res: Response) => {
     }
 }
 
+// create product
+
 const addNewProduct = async (req: Request, res: Response) => {
 
     try {
@@ -42,6 +46,8 @@ const addNewProduct = async (req: Request, res: Response) => {
     }
 }
 
+// get single product 
+
 const getSingleProduct = async (req: Request, res: Response) => {
     try {
         const { productId } = req.params;
@@ -61,12 +67,72 @@ const getSingleProduct = async (req: Request, res: Response) => {
     }
 }
 
+//update single product
+
+const updateSingleProduct = async (req: Request, res: Response) => {
+    try {
+        const { productId } = req.params;
+        const productData = req.body;
+        // console.log(productId, productData);
+
+        const updatedProduct = await ProductService.upadteSingleProductFromDb(productId, productData);
+        if (updatedProduct) {
+            res.status(200).json({
+                success: true,
+                message: "Product updated successfully!",
+                data: updatedProduct
+            });
+        } else {
+            res.status(404).json({
+                success: false,
+                message: "Product not found!",
+                data: null
+            });
+        }
+    } catch (error) {
+        res.status(404).json({
+            success: false,
+            message: "Product not found!",
+            data: null
+        })
+    }
+
+}
+
+// delete single product
+const deleteSingleProduct = async (req: Request, res: Response) => {
+    try {
+        const { productId } = req.params;
+        const result = await ProductService.deleteProductFromDb(productId);
+        if (result) {
+            res.status(200).json({
+                success: true,
+                message: "Product deleted successfully!",
+                data: null
+            });
+        } else {
+            res.status(404).json({
+                success: false,
+                message: "Product not found!",
+                data: null
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "An error occurred while deleting the product!",
+            data: null
+        });
+    }
+}
 
 
 export const ProductController = {
     getAllProducts,
     addNewProduct,
-    getSingleProduct
+    getSingleProduct,
+    updateSingleProduct,
+    deleteSingleProduct
 }
 
 
