@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import { ProductService } from "./product.service";
 
+
+// get all or searched product
+
 const getAllProducts = async (req: Request, res: Response) => {
     try {
         const searchTerm = req.query.searchTerm as string;
@@ -18,6 +21,8 @@ const getAllProducts = async (req: Request, res: Response) => {
         });
     }
 };
+
+// add new product
 
 const addNewProduct = async (req: Request, res: Response) => {
     try {
@@ -37,6 +42,8 @@ const addNewProduct = async (req: Request, res: Response) => {
     }
 };
 
+// get single product
+
 const getSingleProduct = async (req: Request, res: Response) => {
     try {
         const { productId } = req.params;
@@ -54,6 +61,9 @@ const getSingleProduct = async (req: Request, res: Response) => {
         });
     }
 };
+
+
+// update single product 
 
 const updateSingleProduct = async (req: Request, res: Response) => {
     try {
@@ -81,6 +91,8 @@ const updateSingleProduct = async (req: Request, res: Response) => {
         });
     }
 };
+
+// delete single product 
 
 const deleteSingleProduct = async (req: Request, res: Response) => {
     try {

@@ -1,6 +1,7 @@
 import cors from "cors"
 import express, { Application, Request, Response } from "express"
 import { ProductsRoute } from "./app/modules/product/product.route";
+import { OrdersRoute } from "./app/modules/order/order.route";
 const app: Application = express();
 
 //parsers
@@ -12,17 +13,8 @@ app.get("/", (req: Request, res: Response) => {
 })
 
 // application routes 
-app.use("/api", ProductsRoute)
-
-// my expected endpoint
-// /api/products get/post ok
-// /api/products/:productId get/put/delete/
-
-// /api/products?searchTerm=iphone get
-// /api/orders  post/get
-// /api/orders?email=level2@programming-hero.com get
-
-
+app.use("/api/products", ProductsRoute)
+app.use("/api/orders", OrdersRoute)
 
 
 export default app;
