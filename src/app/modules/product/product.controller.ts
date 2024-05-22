@@ -1,81 +1,65 @@
-import { Request, Response } from "express"
-import { ProductService } from "./product.service"
-
-// get all product 
+import { Request, Response } from "express";
+import { ProductService } from "./product.service";
 
 const getAllProducts = async (req: Request, res: Response) => {
     try {
-        const result = await ProductService.getAllProductsFromDb()
-        res.status(200).json(
-            {
-                "success": true,
-                "message": "Products fetched successfully!",
-                "data": result
-            }
-        )
-    } catch (error) {
-        res.status(404).json(
-            {
-                "success": true,
-                "message": "Products fetched successfully!",
-                "data": null,
-            }
-        )
-    }
-}
-
-// create product
-
-const addNewProduct = async (req: Request, res: Response) => {
-
-    try {
-        const products = req.body
-        // console.log(products);
-        const result = await ProductService.addProductDb(products)
-        res.status(201).json({
+        const searchTerm = req.query.searchTerm as string;
+        const products = await ProductService.getProducts(searchTerm);
+        res.status(200).json({
             success: true,
-            message: "Product Create Successfully",
-            data: result
-        })
+            message: searchTerm ? `Products matching search term '${searchTerm}' fetched successfully!` : "All products fetched successfully!",
+            data: products
+        });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Something Wrong, Try Again",
+            message: "An error occurred while fetching products!",
             data: null
-        })
+        });
     }
-}
+};
 
-// get single product 
+const addNewProduct = async (req: Request, res: Response) => {
+    try {
+        const products = req.body;
+        const result = await ProductService.addProductDb(products);
+        res.status(201).json({
+            success: true,
+            message: "Product created successfully",
+            data: result
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong, please try again",
+            data: null
+        });
+    }
+};
 
 const getSingleProduct = async (req: Request, res: Response) => {
     try {
         const { productId } = req.params;
-        // console.log(productId);
-        const result = await ProductService.singleProductFromDb(productId)
+        const result = await ProductService.singleProductFromDb(productId);
         res.status(200).json({
-            "success": true,
-            "message": "Product fetched successfully!",
-            "data": result
-        })
+            success: true,
+            message: "Product fetched successfully!",
+            data: result
+        });
     } catch (error) {
         res.status(404).json({
-            "success": false,
-            "message": "Product Not Found!",
-            "data": null
-        })
+            success: false,
+            message: "Product not found!",
+            data: null
+        });
     }
-}
-
-//update single product
+};
 
 const updateSingleProduct = async (req: Request, res: Response) => {
     try {
         const { productId } = req.params;
         const productData = req.body;
-        // console.log(productId, productData);
-
-        const updatedProduct = await ProductService.upadteSingleProductFromDb(productId, productData);
+        const updatedProduct = await ProductService.updateSingleProductFromDb(productId, productData);
         if (updatedProduct) {
             res.status(200).json({
                 success: true,
@@ -94,12 +78,10 @@ const updateSingleProduct = async (req: Request, res: Response) => {
             success: false,
             message: "Product not found!",
             data: null
-        })
+        });
     }
+};
 
-}
-
-// delete single product
 const deleteSingleProduct = async (req: Request, res: Response) => {
     try {
         const { productId } = req.params;
@@ -124,8 +106,7 @@ const deleteSingleProduct = async (req: Request, res: Response) => {
             data: null
         });
     }
-}
-
+};
 
 export const ProductController = {
     getAllProducts,
@@ -133,7 +114,4 @@ export const ProductController = {
     getSingleProduct,
     updateSingleProduct,
     deleteSingleProduct
-}
-
-
-
+};
