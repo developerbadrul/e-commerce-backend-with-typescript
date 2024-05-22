@@ -15,7 +15,7 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/api", ProductsRoute)
 
 // my expected endpoint
-// /api/products get/post
+// /api/products get/post ok
 // /api/products/:productId get/put/delete/
 
 // /api/products?searchTerm=iphone get

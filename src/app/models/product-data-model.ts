@@ -5,12 +5,12 @@ import { Inventory, Product, Variant } from '../modules/product/product.interfac
 const variantSchema: Schema<Variant> = new Schema({
     type: { type: String, required: true },
     value: { type: String, required: true }
-});
+}, { _id: false });
 
 const inventorySchema: Schema<Inventory> = new Schema({
     quantity: { type: Number, required: true },
     inStock: { type: Boolean, required: true }
-});
+}, { _id: false });
 
 const productSchema: Schema<Product> = new Schema({
     name: { type: String, required: true },
