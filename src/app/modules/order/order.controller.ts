@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from "express";
 import { OrderService } from "./order.service";
+
+// new order create 
 
 const createOrder = async (req: Request, res: Response) => {
     try {
@@ -10,14 +13,17 @@ const createOrder = async (req: Request, res: Response) => {
             message: "Order created successfully!",
             data: result
         });
-    } catch (error: unknown) {
+    } catch (error: any) {
         res.status(400).json({
             success: false,
-            message: "problem with order, try again",
+            message: `Error: ${error.message}`,
             data: null
         });
     }
 };
+
+
+// get order data 
 
 const getOrders = async (req: Request, res: Response) => {
     try {

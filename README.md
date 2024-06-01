@@ -21,6 +21,44 @@ Make sure you have the following installed on your machine:
 - Node.js (>= 12.x)
 - npm (>= 6.x)
 
+## API Documentation
+
+This repository contains the documentation for the API endpoints of Ecommerce Backend With typeScript. It provides detailed information about the available endpoints, request methods, request/response formats, and sample responses.
+
+## Live Link: https://assignment-2-p-hero.vercel.app
+
+## Documentation
+
+The API documentation is available in HTML format. You can access it by opening the following link in your browser:
+
+[API Documentation](https://assignment-2-p-hero.vercel.app/)
+
+## Endpoints
+
+The API consists of the following endpoints:
+
+- **Products Management**
+  - [Create a New Product](https://assignment-2-p-hero.vercel.app/api/products) (POST)
+  - [Retrieve a List of All Products](https://assignment-2-p-hero.vercel.app/api/products) (GET)
+  - [Retrieve a Specific Product by ID](https://assignment-2-p-hero.vercel.app/api/products/:productId) (GET)
+  - [Update Product Information](https://assignment-2-p-hero.vercel.app/api/products/:productId) (PUT)
+  - [Delete a Product](https://assignment-2-p-hero.vercel.app/api/products/:productId) (DELETE)
+  - [Search a Product](https://assignment-2-p-hero.vercel.app/api/products?searchTerm=iphone) (GET)
+- **Order Management**
+  - [Create a New Order](https://assignment-2-p-hero.vercel.app/api/orders) (POST)
+  - [Retrieve All Orders](https://assignment-2-p-hero.vercel.app/api/orders) (GET)
+  - [Retrieve Orders by User Email](https://assignment-2-p-hero.vercel.app/api/orders?email=level2@programming-hero.com) (GET)
+
+## Usage
+
+To use the API, you can send requests to the respective endpoints using tools like cURL, Postman, or your preferred HTTP client.
+
+### Example:
+
+```bash
+curl -X GET https://assignment-2-p-hero.vercel.app/api/products
+
+
 ### Installation
 
 1. Clone the repository:
